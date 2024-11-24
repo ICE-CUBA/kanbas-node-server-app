@@ -15,7 +15,7 @@ const app = express();
 app.use(
     cors({
         credentials: true,
-        origin: "https://kanbas-node-server-app-1xo0.onrender.com" || "http://localhost:3000",
+        origin: "https://marvelous-stardust-877794.netlify.app" || "http://localhost:3000",
     })
 );
 
