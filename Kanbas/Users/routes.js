@@ -122,7 +122,7 @@ function UserRoutes(app) {
         const status = await enrollmentsDao.unenrollUserFromCourse(uid, cid);
         res.send(status);
     };
-
+    
     app.post("/api/users/signup", signup);
     app.post("/api/users/current/courses", createCourse);
     app.get("/api/users/:uid/courses", findCoursesForUser);
