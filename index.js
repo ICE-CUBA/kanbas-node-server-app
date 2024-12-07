@@ -12,7 +12,27 @@ import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
 import mongoose from "mongoose";
 import "dotenv/config";
 
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas"
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING
+console.log(CONNECTION_STRING);
+mongoose.connect(CONNECTION_STRING, {
+    dbName: 'kanbas'
+})
+    .then(async () => {
+        console.log('Connected to MongoDB');
+        const dbName = mongoose.connection.db.databaseName;
+        console.log('Current database name:', dbName);
+        
+        const admin = mongoose.connection.db.admin();
+        const dbList = await admin.listDatabases();
+        console.log('Available databases:', dbList.databases.map(db => db.name));
+        
+        const collections = await mongoose.connection.db.listCollections().toArray();
+        console.log('Collections in current database:', collections.map(c => c.name));
+        
+        const userCount = await mongoose.connection.db.collection('users').countDocuments();
+        console.log('Number of documents in users collection:', userCount);
+    })
+    .catch(err => console.error('MongoDB Connection Error:', err));
 mongoose.connect(CONNECTION_STRING);
 
 const app = express();
