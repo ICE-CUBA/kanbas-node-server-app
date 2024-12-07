@@ -39,7 +39,7 @@ const app = express();
 app.use(
     cors({
         credentials: true,
-        origin: "fancy-cannoli-04d195.netlify.app" || "http://localhost:3000"
+        origin: "https://scintillating-kulfi-2a1a6b.netlify.app" || "http://localhost:3000"
     })
 );
 
