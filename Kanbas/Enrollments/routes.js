@@ -4,20 +4,20 @@ export default function EnrollmentRoutes(app) {
     app.post("/api/enrollments", async (req, res) => {
         const { userId, courseId } = req.body;
         await enrollmentDao.enrollUserInCourse(userId, courseId);
-        const updatedEnrollments = await enrollmentDao.findEnrollmentsForUser(userId);
+        const updatedEnrollments = await enrollmentDao.findCoursesForUser(userId);
         res.status(201).json(updatedEnrollments);
     });
 
     app.delete("/api/enrollments", async (req, res) => {
         const { userId, courseId } = req.body;
-        await enrollmentDao.unEnrollUserInCourse(userId, courseId);
-        const updatedEnrollments = await enrollmentDao.findEnrollmentsForUser(userId);
+        await enrollmentDao.unenrollUserFromCourse(userId, courseId);
+        const updatedEnrollments = await enrollmentDao.findCoursesForUser(userId);
         res.status(200).json(updatedEnrollments);
     });
 
     app.get("/api/enrollments/:userId", async (req, res) => {
         const { userId } = req.params;
-        const enrollments = await enrollmentDao.findEnrollmentsForUser(userId);
+        const enrollments = await enrollmentDao.findCoursesForUser(userId);
         res.json(enrollments);
     });
 
