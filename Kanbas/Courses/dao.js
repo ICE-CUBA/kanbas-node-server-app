@@ -24,3 +24,8 @@ export function deleteCourse(courseId) {
 export function updateCourse(courseId, courseUpdates) {
     return model.updateOne({ _id: courseId }, { $set: courseUpdates });
 }
+
+export function findOneCourse(courseId) {
+    return model.findById(courseId);
+}
+
