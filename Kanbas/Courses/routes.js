@@ -42,16 +42,10 @@ export default function CourseRoutes(app) {
     });
 
     app.get("/api/courses/:courseId/modules", async (req, res) => {
-    const { courseId } = req.params;
-    const course = await dao.findOneCourse(courseId);
-    if (course && course.length > 0) {
-        const courseName = course[0].name;
-        const modules = await modulesDao.findModulesForCourse(courseName);
+        const { courseId } = req.params;
+        const modules = await modulesDao.findModulesForCourse(courseId);
         res.json(modules);
-    } else {
-        res.status(404).json({ message: "Course not found" });
-    }
-});
+    });
 
     app.post("/api/courses/:courseId/assignments", async (req, res) => {
         const { courseId } = req.params;
