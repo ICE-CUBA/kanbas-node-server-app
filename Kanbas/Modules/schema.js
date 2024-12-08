@@ -3,7 +3,7 @@ const moduleSchema = new mongoose.Schema(
   {
     name: String,
     description: String,
-    course: String,
+    course: { type: mongoose.Schema.Types.ObjectId, ref: "CourseModel" },
   },
   { collection: "modules" }
 );
